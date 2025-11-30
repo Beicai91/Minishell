@@ -1,0 +1,11 @@
+# Minishell
+
+## Technical notes
+- Parsing and execution
+This project uses an **Abstract Syntax Tree (AST)** to represent the command line. More specifically, it follows a **type-tagged, polymorphic** AST design.<br> At the core is a minimal base struct (`t_cmd`) that contains only an `int type` field. Every concrete command —pipeline, list operator, redirection, exec command, logical AND/OR, heredoc, and so on - has its own specialized struct that embeds the base struct's header field (`int type`) and then carries whatever additional data.
+
+Because all nodes share this common `int type` header, the parser and executor can treat any specialized node as a generic `t_cmd` and select the correct behavior based solely on the type.<br>
+
+During parsing, the input command line is broken into logical components and assembled into an AST. Binary operators such as pipelines, command lists, and logical AND/OR become nodes containing two children (`left` and `right`). Commands like redirections or heredocs wrap a single subcommand. Leaf nodes are exec-command nodes, which hold the final command arguments and all information needed to run the program.<br>
+
+Execution is performed by recursively traversing the AST and handling each node according to its type, allowing the shell to evaluate complex command lines in a structured and predictable way.![AST_examples](https://github.com/user-attachments/assets/706eb41c-9ef0-4fdd-a530-e1c7c55b27cb)
