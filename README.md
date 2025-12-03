@@ -1,9 +1,35 @@
 # Minishell
-Minishell is a small UNIX shell that reproduces the core behavior of bash.
+Minishell is a small **UNIX shell** that reproduces the core behavior of **bash**.
 It takes user input, tokenizes and parses it, builds an Abstract Syntax Tree (AST), and executes the resulting command structure while handling pipes, redirections, command lists, logical operators, heredocs, quoting, and environments.
 
 ## Installation
+1. Install the Readline library
+Minishell depends on the GNU readline library for interactive input. You must install Readline on your system before building the project
+### macOS (Homebrew)
+```
+brew install readline
+```
+### Linux(Debian/Ubuntu)
+```
+sudo apt-get install libreadline-dev
+```
+2. Update the Makefile (`H_PATH` and `LIB_PATH`)
+```
+H_PATH := -I ./include -I <readline-install-path>/include
+LIB_PATH := -L ./lib/libft -L <readline-install-path>/lib
+```
+Replace `<readline-install-path>` with the actual directory on your machine.
+
+3. Build the project
+```
+make all
+```
+
 ## Usage
+```
+./minishell [command-line]
+```
+
 ## Dev features
 - Manual tokenizer with operator-aware lookahead
 - Recursive-descent parser respecting shell precedence
