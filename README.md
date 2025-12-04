@@ -1,6 +1,6 @@
 # Minishell
 Minishell is a small **UNIX shell** that reproduces the core behavior of **bash**.
-It takes user input, tokenizes and parses it, builds an Abstract Syntax Tree (AST), and executes the resulting command structure while handling pipes, redirections, command lists, logical operators, heredocs, quoting, and environments.
+It takes user input, tokenizes and parses it, builds an Abstract Syntax Tree (AST), and executes the resulting command structure while handling pipes, redirections, command lists, logical operators, blocks, heredocs, quoting, and environments.
 
 ## Installation
 1. Install the Readline library
